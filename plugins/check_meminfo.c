@@ -317,12 +317,16 @@ int main (int argc, char** argv)
 
 	printf(
         "%s - Free: %4.2f %% (%s) "
-        "|memavailable=%ldB;%ld;%ld;0, memtotal=%ld;0;0;0; memused=%ld;0;0;0; "
-        "membuffer=%ld;0;0;0; memcached=%ld;0;0;0; swaptotal=%ld;0;0;0; "
-        "swapused=%ld;0;0;0;\n",
+        "|memavailable=%ldB;%ld;%ld;0.0, memtotal=%ld;0.0;0.0;0.0; "
+        "memused=%ld;0.0;0.0;0.0; membuffer=%ld;0.0;0.0;0.0; "
+        "memcached=%ld;0.0;0.0;0.0; swaptotal=%ld;0.0;0.0;0.0; "
+        "swapused=%ld;0.0;0.0;0.0;\n",
 		state[state_rc], memavailable_percent, memavailable_human_readable,
-        memavailable, warning, critical,
-        memtotal, memused, membuffer, memcached, swaptotal, swapused);
+        memavailable, warning,
+        critical, memtotal,
+        memused, membuffer,
+        memcached, swaptotal,
+        swapused);
 
     exit(state_rc);
 }
