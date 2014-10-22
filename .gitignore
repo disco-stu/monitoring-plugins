@@ -1,3 +1,4 @@
+*.swp
 *.o
 check_meminfo
 check_procstat
