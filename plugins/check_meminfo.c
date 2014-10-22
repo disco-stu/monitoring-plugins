@@ -26,6 +26,11 @@
 #define BUFFER_LEN 127
 #define MAX_LEN_STATE 7
 
+#define B_TO_TB ((double) 1024 * 1024 * 1024 * 1024)  
+#define B_TO_GB ((double) 1024 * 1024 * 1024)  
+#define B_TO_MB ((double) 1024 * 1024) 
+#define B_TO_KB ((double) 1024)
+
 /*
  * print_help:
  *
@@ -49,7 +54,7 @@ void print_help (char* progname)
 
 /*
  * print_version():
- * 
+ *
  * prints version information to stdout
  */
 void print_version()
@@ -78,16 +83,16 @@ void print_error(char* s_error)
  */
 void make_human_readable(char* human_readable, long int number)
 {
-    if(number > 3000)
-        sprintf(human_readable, "%ld kB", number / 1024);
-    else if(number > 3000*1024)
-        sprintf(human_readable, "%ld MB", number / (1024*2));
-    else if(number > 3000*1024*2)
-        sprintf(human_readable, "%ld GB", number / (1024*3));
-    else if(number > 3000*1024*3)
-        sprintf(human_readable, "%ld TB", number / (1024*4));
+    if(number >  B_TO_TB)
+        sprintf(human_readable, "%.2lf TB", (double) number / B_TO_TB);
+    else if(number > B_TO_GB)
+        sprintf(human_readable, "%.2lf GB", (double) (number / B_TO_GB));
+    else if(number > B_TO_MB)
+        sprintf(human_readable, "%.2lf MB", (double) number / B_TO_MB);
+    else if(number > B_TO_KB)
+        sprintf(human_readable, "%.2lf kB", (double) number / B_TO_KB);
     else
-        sprintf(human_readable, "%ld B", number);
+        sprintf(human_readable, "%.2lf B", (double)  number);
 }
 
 int main (int argc, char** argv)
@@ -204,9 +209,9 @@ int main (int argc, char** argv)
      * check if percentage values are between 0 and 1
      */
     if(warning_percent != -1 && (warning_percent < 0 || warning_percent > 100))
-        print_error("Warning can't smaler then 0 or greater then 100");
+        print_error("Warning can't be smaler then 0 or greater then 100");
     if(critical_percent != -1 && (critical_percent < 0 || critical_percent > 100))
-        print_error("Critical can't smaler then 0 or greater then 100");
+        print_error("Critical can't be smaler then 0 or greater then 100");
 
 
     if(verbose)
@@ -309,13 +314,17 @@ int main (int argc, char** argv)
     make_human_readable((char*)&memavailable_human_readable, memavailable);
 
 	printf(
-        "%s - Free: %4.2f %% (%ld MB) "
-        "|memavailable=%ldB;%ld;%ld;0, memtotal=%ld;0;0;0; memused=%ld;0;0;0; "
-        "membuffer=%ld;0;0;0; memcached=%ld;0;0;0; swaptotal=%ld;0;0;0; "
-        "swapused=%ld;0;0;0;\n",
-		state[state_rc], memavailable_percent, memavailable / 1024 / 1024,
-        memavailable, warning, critical,
-        memtotal, memused, membuffer, memcached, swaptotal, swapused);
+        "%s - Free: %4.2f %% (%s) "
+        "|memavailable=%ldB;%ld;%ld;0.0, memtotal=%ld;0.0;0.0;0.0; "
+        "memused=%ld;0.0;0.0;0.0; membuffer=%ld;0.0;0.0;0.0; "
+        "memcached=%ld;0.0;0.0;0.0; swaptotal=%ld;0.0;0.0;0.0; "
+        "swapused=%ld;0.0;0.0;0.0;\n",
+		state[state_rc], memavailable_percent, memavailable_human_readable,
+        memavailable, warning,
+        critical, memtotal,
+        memused, membuffer,
+        memcached, swaptotal,
+        swapused);
 
     exit(state_rc);
 }

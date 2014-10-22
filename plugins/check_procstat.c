@@ -40,8 +40,8 @@ void print_help (const char *progname)
     printf(" %s [options]\n", progname);
     printf("\n");
     printf("Options\n");
-    printf(" -w_u, --warning_user\t\twarning threshold (in bytes)\n");
-    printf(" -c_u, --critical_user\t\tcriticalthreshold (in bytes)\n");
+    printf(" -wu, --warning_user\t\twarning threshold (in percent)\n");
+    printf(" -cu, --critical_user\t\tcriticalthreshold (in percent)\n");
     printf(" -v,      --verbose\t\tverbose output\n");
     printf("\n");
     printf(" -h,      --help\t\tdisplay this help text\n");

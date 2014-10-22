@@ -6,7 +6,7 @@ OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=check_meminfo check_procstat
 
 all: $(EXECUTABLE)
-	
+
 check_meminfo: check_meminfo.o
 	$(CC) $(LDFLAGS) $< -o $@
 
