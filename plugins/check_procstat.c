@@ -61,11 +61,11 @@ void print_version()
 /*
  * exit_with_message:
  *
- * print a message to stderror and exit with return code rc
+ * print a message to stdout and exit with return code rc
  */
 void exit_with_message(int rc, char *message)
 {
-    fprintf(stderr, "%s - %s\n", state[rc], message);
+    fprintf(stdout, "%s - %s\n", state[rc], message);
 
     exit(rc);
 }
