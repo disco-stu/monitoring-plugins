@@ -161,7 +161,7 @@ int main(int argc, const char *argv[])
     stat_t           stat,
                      /* initialize old_stat, just in case we got no old data */
                      old_stat = {0, 0, 0, 0, 0, 0, 0, 0,},
-                     diff_stat;
+                     diff_stat = {0, 0, 0, 0, 0, 0, 0, 0,};
 
     struct tm       *tm_taken;
 
