@@ -28,14 +28,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
-
-/*
- * We have to define __USE_BSD, otherwise readlink
- * will not be available.
- *
- * See unistd.h for more information.
- */
-#define __USE_BSD 1
 #include <unistd.h>
 
 #include "../include/icinga.h"

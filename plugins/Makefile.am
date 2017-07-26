@@ -1,4 +1,4 @@
-AM_CFLAGS = --pedantic -Wall -std=c99 -O2
+AM_CFLAGS = --pedantic -Wall -O2
 AM_LDFLAGS =
 
 bin_PROGRAMS = check_meminfo check_nofiles_limits check_procstat
